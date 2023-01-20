@@ -1,44 +1,47 @@
- onChange = event => {
-    _logger("onChange", { syntheticEvent: event });
+const onFormFieldChange = (event) => {
+    console.log("onChange", { syntheticEvent: event });
+    //react calls e the synthetic event. pull out input (aka target) this is done outside the setState function. variables need to be grabbed early
 
     //capture info you need from event here as the event object will fall out of scope quickly
 
     //the event.target will represent the input
-    const target = event.target;
+    const target = event.target; //grabbed before setSTATE
+    //this is the input
 
     //this is the value of the input, the value in the text box the user types into
-    const value = target.value;
+    const value = target.value; //grab before SET STATE
 
     //this is the name (so be sure to give your form fields a name attribute)
-    const name = target.name;
+    const name = target.name; //GRAB BEFORE SET STATE
 
     //set the new state using the old property name / object key and using the new value (updatedFormData)
-    this.setState(prevState => {
-      _loggerState("updater onChange");
+    setState((prevState) => {
+      console.log("updater onChange is firing");
 
       // copy the personData object from state using the spread operator
       const updatedFormData = {
-        ...prevState.formData
+        ...prevState,
+        //... grabs previous spread, prevState grabs original object
       };
 
       //change the value of the copied object using the name and using bracket notation
       updatedFormData[name] = value;
+      //in this object, change [name] into a new value
 
       return { formData: updatedFormData };
-    }, this.stateChanged);
+      //new value is returned
+    });
 
-    _logger("end onChange");
+    console.log("end onChange");
   };
 
-
+  // EXTRA CODE FROM ONFORMFIELDCHANGE FUNCTION
   // This name is just for clarity. Do not name a function like this. No under scores.
-// If you were dealing with a checkbox you would use a function like this instead
-  onChange_WithCheckBoxCondition = event => {
+  // If you were dealing with a checkbox you would use a function like this instead
+  onChange_WithCheckBoxCondition = (event) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-    
 
-   //the rest of the code would be the same
- 
+    //the rest of the code would be the same
   };
