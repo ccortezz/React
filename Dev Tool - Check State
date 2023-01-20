@@ -1,1 +1,6 @@
-{JSON.stringify(userFormData, undefined, 2)}
+<div className="col-md-5">
+          <h4>Output</h4>
+          <pre>
+            <code>{JSON.stringify(userFormData, undefined, 2)}</code>
+          </pre>
+        </div>
