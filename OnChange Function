@@ -1,0 +1,44 @@
+ onChange = event => {
+    _logger("onChange", { syntheticEvent: event });
+
+    //capture info you need from event here as the event object will fall out of scope quickly
+
+    //the event.target will represent the input
+    const target = event.target;
+
+    //this is the value of the input, the value in the text box the user types into
+    const value = target.value;
+
+    //this is the name (so be sure to give your form fields a name attribute)
+    const name = target.name;
+
+    //set the new state using the old property name / object key and using the new value (updatedFormData)
+    this.setState(prevState => {
+      _loggerState("updater onChange");
+
+      // copy the personData object from state using the spread operator
+      const updatedFormData = {
+        ...prevState.formData
+      };
+
+      //change the value of the copied object using the name and using bracket notation
+      updatedFormData[name] = value;
+
+      return { formData: updatedFormData };
+    }, this.stateChanged);
+
+    _logger("end onChange");
+  };
+
+
+  // This name is just for clarity. Do not name a function like this. No under scores.
+// If you were dealing with a checkbox you would use a function like this instead
+  onChange_WithCheckBoxCondition = event => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+    
+
+   //the rest of the code would be the same
+ 
+  };
