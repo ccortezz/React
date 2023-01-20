@@ -1,0 +1,201 @@
+import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+// import { Routes, Route } from "react-router-dom";
+// import Home from "./components/Home";
+// import Page1 from "./components/Page1";
+// import Page2 from "./components/Page2";
+// import Page3 from "./components/Page3";
+// import Product from "./components/Product";
+
+function App() {
+  const [userFormData, setUserFormData] = useState({
+    firstName: "Gregorio",
+    //bind to the input value with "state".firstName or state.lastName in FORM
+    lastName: "Rojas",
+  });
+  //setFirstName is the updater.
+  // console.log(firstName);
+
+  // const onFirstNameChange = (e) => {
+  //   // debugger;
+  //   console.log(e.target.value);
+  //   //causees onFirstChange to fire
+
+  //   //below is the updater function
+  //   setFirstName(() => {
+  //     return e.target.value;
+  //   });
+  // };
+
+  // onChange = (event) => {
+  const onFormFieldChange = (event) => {
+    console.log("onChange", { syntheticEvent: event });
+
+    const target = event.target;
+
+    const newUserValue = target.value;
+
+    const nameOfField = target.name;
+    console.log({ nameOfField, newUserValue });
+
+    setUserFormData((previousUser) => {
+      console.log("updater onChange is firing");
+
+      const newUserObject = {
+        ...previousUser,
+      };
+
+      newUserObject[nameOfField] = newUserValue;
+
+      return newUserObject;
+    });
+
+    console.log("end onChange");
+  };
+
+  // #region
+  // const [lastName, setLastName] = useState("Rojas");
+  // console.log(lastName);
+
+  // const onLastNameChange = (e) => {
+  //   // debugger;
+  //   console.log(e.target.value);
+  //   //causees onFirstChange to fire
+
+  //   //below is the updater function
+  //   setLastName(() => {
+  //     return e.target.value;
+  //   });
+  // };
+  // endregion
+
+  return (
+    <div className="container mt-5 fs-2">
+      <div className="row">
+        <div className="col-md-5">
+          <form>
+            <div className="mb-3">
+              <label htmlFor="firstName" className="form-label">
+                First Name
+              </label>
+              <input
+                type="text"
+                className="form-control  form-control-lg"
+                id="firstName"
+                name="firstName"
+                //must have a name, value, and onFormClick
+                placeholder="Please Enter Your First Name"
+                value={userFormData.firstName}
+                onChange={onFormFieldChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Last Name
+              </label>
+              <input
+                type="text"
+                className="form-control  form-control-lg"
+                id="lastName"
+                name="lastName"
+                //must have a name, value, and onFormClick
+                placeholder="Please Enter Your Lickitylast Name"
+                value={userFormData.lastName}
+                onChange={onFormFieldChange}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
+        <div className="col-md-5">
+          <h4>Output</h4>
+          <pre>
+            <code>{JSON.stringify(userFormData, undefined, 2)}</code>
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    // <React.Fragment>
+    //   <nav
+    //     className="navbar navbar-expand-lg  bg-light"
+    //     aria-label="Eighth navbar example"
+    //   >
+    //     <div className="container">
+    //       <Link to="/" className="navbar-brand btn btn-outline-primar">
+    //         Client Side Routing
+    //       </Link>
+    //       <button
+    //         className="navbar-toggler"
+    //         type="button"
+    //         data-bs-toggle="collapse"
+    //         data-bs-target="#navbarsExample07"
+    //         aria-controls="navbarsExample07"
+    //         aria-expanded="false"
+    //         aria-label="Toggle navigation"
+    //       >
+    //         <span className="navbar-toggler-icon"></span>
+    //       </button>
+
+    //       <div className="collapse navbar-collapse" id="navbarsExample07">
+    //         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+    //           <li className="nav-item">
+    //             <Link
+    //               to="/page1"
+    //               className="nav-link active btn-link btn "
+    //               aria-current="page"
+    //             >
+    //               Page 1
+    //             </Link>
+    //           </li>
+    //           <li className="nav-item">
+    //             <Link to="/page2" className="nav-link active btn-link btn ">
+    //               Page 2
+    //             </Link>
+    //           </li>
+    //           <li className="nav-item">
+    //             <Link to="/page3" className="nav-link active btn-link btn ">
+    //               Page 3
+    //             </Link>
+    //           </li>
+    //           <li className="nav-item">
+    //             <Link
+    //               to="/products/100"
+    //               className="nav-link active btn-link btn "
+    //             >
+    //               Product 100
+    //             </Link>
+    //           </li>
+    //           <li className="nav-item">
+    //             <Link
+    //               to="/products/new"
+    //               className="nav-link active btn-link btn "
+    //             >
+    //               New Product
+    //             </Link>
+    //           </li>
+    //         </ul>
+    //       </div>
+    //     </div>
+    //   </nav>
+
+    //   <div className="container ">
+    //     <Routes>
+    //       <Route path="/" element={<Home />} />
+    //       <Route path="/page1" element={<Page1 />}></Route>
+    //       <Route path="/page2" element={<Page2 />} />
+    //       <Route path="/page3" element={<Page3 />} />
+
+    //       <Route path="/products/*" element={<Product />}>
+    //         <Route path=":productId" element={<Product />} />
+    //         <Route path="new" element={<Product />} />
+    //       </Route>
+    //     </Routes>
+    //   </div>
+    // </React.Fragment>
+  );
+}
+
+export default App;
